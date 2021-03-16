@@ -1,21 +1,17 @@
 package projeto.program;
 
-import java.io.*;
+import projeto.classes.Leitor;
 
 public class Main {
 
     public static void main(String[] args) {
+        Leitor leitor = new Leitor();
 
-        File file = new File("Arquivo.txt");
+        Thread arquivoA = new Thread(leitor, "arquivoA");
+        Thread arquivoB = new Thread(leitor, "arquivoB");
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String s;
-            while ((s = br.readLine()) != null) {
-                System.out.println(s);
-            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        arquivoA.start();
+        arquivoB.start();
     }
 }

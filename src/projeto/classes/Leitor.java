@@ -9,13 +9,19 @@ public class Leitor implements Runnable {
 
     @Override
     public void run() {
+
+        File file = new File("temp");
+        File[] arquivos = file.listFiles();
+        for (int i = 0; i < arquivos.length; i++) {
+
+            System.out.println(arquivos[i].getName());
+        }
+
         System.out.println("Lendo ArquivoA");
         lerArquivo("temp\\Arquivo.txt", "a");
         System.out.println("Lendo ArquivoB");
         lerArquivo("temp\\ArquivoB.txt", "b");
     }
-
-
 
     public static synchronized void lerArquivo(String pathArquivo, String index) {
         File file = new File(pathArquivo);

@@ -1,44 +1,27 @@
 package projeto.program;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import projeto.classes.Leitor;
+
+import java.io.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        lendoArquivoB();
-        lendoArquivoA();
+        Leitor leitor = new Leitor();
+        leitor.run();
     }
 
-    public static void lendoArquivoA() {
-        File file = new File("temp\\Arquivo.txt");
+
+    public static void lerArquivo(String pathArquivo, String index) {
+        File file = new File(pathArquivo);
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String s;
             while ((s = br.readLine()) != null) {
-                if(s.endsWith("a") ||  s.endsWith("A")) {
+                if (s.endsWith(index)) {
                     System.out.println(s);
                 }
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void lendoArquivoB()  {
-        File file = new File("temp\\ArquivoB.txt");
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String s;
-            while ((s = br.readLine()) != null) {
-                if(s.endsWith("b") || s.endsWith("B")) {
-                    System.out.println(s);
-                }
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

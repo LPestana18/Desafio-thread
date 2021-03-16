@@ -9,32 +9,23 @@ public class Leitor implements Runnable {
 
     @Override
     public void run() {
-        leitorArquivoA();
-        leitorArquivoB();
+        System.out.println("Lendo ArquivoA");
+        lerArquivo("temp\\Arquivo.txt", "a");
+        System.out.println("Lendo ArquivoB");
+        lerArquivo("temp\\ArquivoB.txt", "b");
     }
 
 
-    private static void leitorArquivoA() {
-        File file = new File("Arquivo.txt");
+
+    public static synchronized void lerArquivo(String pathArquivo, String index) {
+        File file = new File(pathArquivo);
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String s;
             while ((s = br.readLine()) != null) {
-                System.out.println(s);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void leitorArquivoB() {
-        File file = new File("ArquivoB.txt");
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String s;
-            while ((s = br.readLine()) != null) {
-                System.out.println(s);
+                if (s.endsWith(index)) {
+                    System.out.println(s);
+                }
             }
 
         } catch (IOException e) {

@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Leitor implements Runnable {
 
@@ -37,17 +35,6 @@ public class Leitor implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<String> listaDeArquivos() {
-        File file = new File("temp");
-        File[] arquivos = file.listFiles();
-        List<String> nomeArquivos = new ArrayList<>();
-        for (File arquivo : arquivos) {
-            nomeArquivos.add(arquivo.getPath());
-        }
-
-        return nomeArquivos;
     }
 
     public String getIndex() {

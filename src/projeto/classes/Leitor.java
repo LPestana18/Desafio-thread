@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Leitor implements Runnable {
 
     private String path;
     private String index;
+
+    private static Lock lock = new ReentrantLock();
 
     public Leitor(String path, String index) {
         this.path = path;
@@ -17,10 +21,12 @@ public class Leitor implements Runnable {
 
     @Override
     public void run() {
+        lock.lock();
         lerArquivo(path, index);
+        lock.unlock();
     }
 
-    public static synchronized  void lerArquivo(String pathArquivo, String index) {
+    public static void lerArquivo(String pathArquivo, String index) {
         File file = new File(pathArquivo);
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {

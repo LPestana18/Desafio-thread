@@ -4,6 +4,8 @@ import projeto.classes.Leitor;
 import projeto.classes.ListaDiretorio;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
@@ -11,13 +13,12 @@ public class Main {
 
         File raiz = new File("C:\\Users\\Lucas Pestana\\Desktop\\Estudo-java\\Desafio\\temp");
         ListaDiretorio listaDiretorio = new ListaDiretorio();
-        listaDiretorio.listaArquivos(raiz);
 
+        List<File> files = Arrays.asList(listaDiretorio.listaArquivos(raiz));
 
-        Leitor leitor = new Leitor("temp\\Arquivo.txt", "a");
-        leitor.run();
-
-
-
+        for (File f : files) {
+            Leitor leitor = new Leitor(f.toString(), "a");
+            leitor.run();
+        }
     }
 }

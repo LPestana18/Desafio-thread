@@ -10,41 +10,32 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Leitor implements Runnable {
 
     private String path;
-    private String index;
 
     private static Lock lock = new ReentrantLock();
 
-    public Leitor(String path, String index) {
+    public Leitor(String path) {
         this.path = path;
-        this.index = index;
     }
 
     @Override
     public void run() {
         lock.lock();
-        lerArquivo(path, index);
+        lerArquivo(path);
         lock.unlock();
     }
 
-    public static void lerArquivo(String pathArquivo, String index) {
+    public static void lerArquivo(String pathArquivo) {
         File file = new File(pathArquivo);
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String s;
             System.out.println(Thread.currentThread().getName());
             while ((s = br.readLine()) != null) {
-                if (s.endsWith(index)) {
-                    System.out.println(s);
-                }
+                System.out.println(s);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getIndex() {
-        return index;
     }
 
     public String getPath() {
@@ -53,9 +44,5 @@ public class Leitor implements Runnable {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public void setIndex(String index) {
-        this.index = index;
     }
 }

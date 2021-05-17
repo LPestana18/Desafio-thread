@@ -17,6 +17,7 @@ public class Main {
         List<File> files = Arrays.asList(listaDiretorio.listaArquivos(raiz));
 
         for (File f : files) {
+            System.out.println(f.getName());
             Leitor leitor = new Leitor(f.toString());
             leitor.run();
         }

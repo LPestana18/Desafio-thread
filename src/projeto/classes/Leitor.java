@@ -11,7 +11,7 @@ public class Leitor implements Runnable {
 
     private String path;
 
-    private static Lock lock = new ReentrantLock();
+    private static final Lock lock = new ReentrantLock();
 
     public Leitor(String path) {
         this.path = path;
@@ -29,20 +29,11 @@ public class Leitor implements Runnable {
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String s;
-            System.out.println(Thread.currentThread().getName());
             while ((s = br.readLine()) != null) {
                 System.out.println(s);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 }

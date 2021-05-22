@@ -21,6 +21,5 @@ public class Main {
             Leitor leitor = new Leitor(f.toString());
             leitor.run();
         }
-        System.out.println("Hello World");
     }
 }
